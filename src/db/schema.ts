@@ -1,0 +1,116 @@
+import { pgTable, serial, text, integer, boolean, timestamp, numeric } from "drizzle-orm/pg-core";
+
+export const schoolSettings = pgTable("school_settings", {
+  id: serial("id").primaryKey(),
+  namaLembaga: text("nama_lembaga").notNull(),
+  npsnVin: text("npsn_vin"),
+  izinOperasional: text("izin_operasional"),
+  akreditasi: text("akreditasi"),
+  alamat: text("alamat"),
+  telepon: text("telepon"),
+  email: text("email"),
+  website: text("website"),
+  pimpinanNama: text("pimpinan_nama"),
+  pimpinanNip: text("pimpinan_nip"),
+  logoPath: text("logo_path"),
+  ttdPimpinanPath: text("ttd_pimpinan_path"),
+  stempelPath: text("stempel_path"),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+export const programStudis = pgTable("program_studis", {
+  id: serial("id").primaryKey(),
+  kodeJurusan: text("kode_jurusan").notNull(),
+  namaJurusan: text("nama_jurusan").notNull(),
+  durasiBulan: integer("durasi_bulan").notNull(),
+  keterangan: text("keterangan"),
+  isActive: boolean("is_active").notNull().default(true),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+export const siswas = pgTable("siswas", {
+  id: serial("id").primaryKey(),
+  noInduk: text("no_induk").notNull(),
+  nik: text("nik"),
+  namaLengkap: text("nama_lengkap").notNull(),
+  jenisKelamin: text("jenis_kelamin").notNull(),
+  tempatLahir: text("tempat_lahir"),
+  tanggalLahir: text("tanggal_lahir"),
+  programStudiId: integer("program_studi_id"),
+  gelombang: text("gelombang"),
+  tahunAngkatan: text("tahun_angkatan"),
+  status: text("status").notNull().default("Aktif"),
+  noHp: text("no_hp"),
+  email: text("email"),
+  alamatDomisili: text("alamat_domisili"),
+  namaWali: text("nama_wali"),
+  noHpWali: text("no_hp_wali"),
+  fotoPath: text("foto_path"),
+  rfidUid: text("rfid_uid"),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+export const staff = pgTable("staff", {
+  id: serial("id").primaryKey(),
+  nip: text("nip").notNull(),
+  nik: text("nik"),
+  namaLengkap: text("nama_lengkap").notNull(),
+  peran: text("peran").notNull(),
+  spesialisasiKejuruan: text("spesialisasi_kejuruan"),
+  statusKepegawaian: text("status_kepegawaian").notNull(),
+  noHp: text("no_hp"),
+  email: text("email"),
+  alamat: text("alamat"),
+  fotoPath: text("foto_path"),
+  rfidUid: text("rfid_uid"),
+  isActive: boolean("is_active").notNull().default(true),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+export const absensis = pgTable("absensis", {
+  id: serial("id").primaryKey(),
+  tanggal: text("tanggal").notNull(),
+  kategori: text("kategori").notNull(),
+  targetId: integer("target_id").notNull(),
+  identifier: text("identifier").notNull(),
+  nama: text("nama").notNull(),
+  jamMasuk: text("jam_masuk"),
+  jamSelesai: text("jam_selesai"),
+  jamMasukSesi2: text("jam_masuk_sesi2"),
+  jamSelesaiSesi2: text("jam_selesai_sesi2"),
+  totalJam: numeric("total_jam"),
+  status: text("status").notNull(),
+  keterangan: text("keterangan"),
+  metodeAbsen: text("metode_absen").notNull(),
+  rfidUidScanned: text("rfid_uid_scanned"),
+  fotoLogPath: text("foto_log_path"),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+export const rfidCards = pgTable("rfid_cards", {
+  id: serial("id").primaryKey(),
+  rfidUid: text("rfid_uid").notNull(),
+  cardNumber: text("card_number"),
+  tipePemilik: text("tipe_pemilik").notNull(),
+  pemilikId: integer("pemilik_id").notNull(),
+  pemilikNama: text("pemilik_nama").notNull(),
+  pemilikIdentifier: text("pemilik_identifier").notNull(),
+  statusKartu: text("status_kartu").notNull().default("Aktif"),
+  pairedAt: timestamp("paired_at"),
+  pairedBy: text("paired_by"),
+  catatan: text("catatan"),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});
+
+export const users = pgTable("users", {
+  id: serial("id").primaryKey(),
+  uid: text("uid").notNull(),
+  email: text("email").notNull(),
+  createdAt: timestamp("created_at").defaultNow(),
+});

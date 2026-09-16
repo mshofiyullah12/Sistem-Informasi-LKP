@@ -1,0 +1,6 @@
+{
+  "name": "Sistem Informasi Nandita Floating Hotel",
+  "description": "Aplikasi Manajemen & Database Terpadu LPK Nandita Floating Hotel",
+  "requestFramePermissions": ["camera"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
